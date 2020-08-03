@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "@types/react": "^16.9.44",
+    "babel-plugin-styled-components": "^1.11.1",
     "typescript": "^3.9.7"
   }
 }
