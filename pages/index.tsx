@@ -1,9 +1,12 @@
 import Head from "next/head";
+import Link from "next/link";
 import { useQuery, gql } from "@apollo/client";
 
+import Text from "../components/Text";
+
 const GET_DOCUMENT = gql`
-  query GetDocument {
-    share(shortId: "Y8wDM") {
+  query GetDocument($shortId: String!) {
+    share(shortId: $shortId) {
       shortId
       version {
         document {
@@ -33,18 +36,19 @@ const GET_DOCUMENT = gql`
 
 export default function Home() {
   // TODO: MOVE TO OTHER PLACE. ONLY HERE TO TEST INTEGRATION WITH API
-  const { data } = useQuery(GET_DOCUMENT);
+  const { data } = useQuery(GET_DOCUMENT, {
+    variables: { shortId: "Y8wDM" },
+  });
 
   return (
-    <div>
-      <Head>
-        <title>Sketch Test</title>
-        <link rel="icon" href="sketch-logo.svg" />
-      </Head>
+    <main>
+      <Text as="p">Hi. Hope this page finds you well.</Text>
 
-      <main>Ola tudo bem</main>
-
-      <footer></footer>
-    </div>
+      <Link href="/document/[document-id]" as="/document/Y8wDM">
+        <Text as="a" variant="small">
+          Link for Y8wDM Document
+        </Text>
+      </Link>
+    </main>
   );
 }
