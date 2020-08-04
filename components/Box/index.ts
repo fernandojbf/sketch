@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import {
   color,
   ColorProps,
@@ -14,16 +15,18 @@ import {
   DisplayProps,
   flexbox,
   FlexboxProps,
+  position,
+  PositionProps,
 } from "styled-system";
 
-interface BoxProps
-  extends ColorProps,
-    SpaceProps,
-    LayoutProps,
-    BackgroundProps,
-    ShadowProps,
-    DisplayProps,
-    FlexboxProps {}
+type BoxProps = ColorProps &
+  SpaceProps &
+  LayoutProps &
+  BackgroundProps &
+  ShadowProps &
+  DisplayProps &
+  FlexboxProps &
+  PositionProps;
 
 const Box = styled.div<BoxProps>`
   ${color}
@@ -33,6 +36,7 @@ const Box = styled.div<BoxProps>`
   ${shadow}
   ${display}
   ${flexbox}
+  ${position}
 `;
 
 export default Box;
