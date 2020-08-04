@@ -30,7 +30,7 @@ export default {
   colors: {
     white: "white",
     gray: "gray",
-    black: "red",
+    black: "black",
   },
 
   shadows: {
