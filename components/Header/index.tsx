@@ -1,6 +1,7 @@
-import Box from "../Box";
 import { ReactNode, FunctionComponent } from "react";
 import styled from "styled-components";
+
+import Box from "../Box";
 
 import { ThemeProps } from "../../styles/theme";
 

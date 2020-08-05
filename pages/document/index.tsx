@@ -4,7 +4,7 @@ export default function DocumentHome() {
   return (
     <div>
       <Header />
-      Document Home
+      Document Home, Nothing to see here
     </div>
   );
 }
