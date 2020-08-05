@@ -1,5 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
+// responsive work could be done here
 const List = styled.ul`
   padding: 0;
   margin: 0;
@@ -10,13 +11,11 @@ const List = styled.ul`
   grid-gap: 32px;
   justify-items: stretch;
   align-items: stretch;
-  padding: 16px 0;
+  padding: 16px;
 `;
 
 const Item = styled.li`
   display: flex;
-  max-width: 100%;
-  max-height: 100%;
 `;
 
 const ContentList = ({ items }) => {

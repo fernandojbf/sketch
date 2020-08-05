@@ -1,37 +1,33 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import Text from "../../components/Text";
+import Text from '../../components/Text';
 
 const Wrapper = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
+  display: grid;
+  grid-auto-columns: 100%;
+  grid-template-rows: minmax(0, 1fr) max-content;
   align-items: center;
-`;
-
-const ImageWrapper = styled.div`
-  display: flex;
+  row-gap: 8px;
   flex: 1;
-  max-width: 100%;
-  max-height: 90%;
-  margin-bottom: 16px;
 `;
 
 const Image = styled.img`
-  object-fit: scale-down;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+  height: 100%;
+  width: 100%;
 `;
 
 const ArtBoardPreview = ({ artboard }) => {
   return (
     <Wrapper>
-      <ImageWrapper>
-        <Image
-          alt={`entry.name thumbnail`}
-          src={artboard.files[0].thumbnails[0].url}
-        />
-      </ImageWrapper>
+      <Image
+        alt={`entry.name thumbnail`}
+        src={artboard.files[0].thumbnails[0].url}
+      />
 
-      <Text>{artboard.name}</Text>
+      <Text textAlign="center">{artboard.name}</Text>
     </Wrapper>
   );
 };
