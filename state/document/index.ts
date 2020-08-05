@@ -53,8 +53,30 @@ export const selectedDocumentAtom = atom({
 });
 
 const selectedArtBoardAtom = atom({
-  key: "atom-document-artboard",
+  key: "atom-artboard-id",
   default: undefined,
+});
+
+export const documentDataSelector = selector({
+  key: "selector-document-data",
+  get: async ({ get }) => {
+    const documentId = get(selectedDocumentAtom);
+
+    if (!documentId) return undefined;
+
+    try {
+      const { data } = await client.query({
+        query: GET_DOCUMENT,
+        variables: {
+          shortId: documentId,
+        },
+      });
+
+      return data.share;
+    } catch (e) {
+      throw e;
+    }
+  },
 });
 
 export const selectedArtBoard = selector({
@@ -84,7 +106,9 @@ export const selectedPrevArtBoard = selector({
   },
   set: ({ get, set }) => {
     const value = get(selectedPrevArtBoard);
-    set(selectedArtBoardAtom, value.id);
+    if (value) {
+      set(selectedArtBoardAtom, value.id);
+    }
   },
 });
 
@@ -105,28 +129,8 @@ export const selectedNextArtBoard = selector({
   },
   set: ({ get, set }) => {
     const value = get(selectedNextArtBoard);
-    set(selectedArtBoardAtom, value.id);
-  },
-});
-
-export const documentDataSelector = selector({
-  key: "selector-document-data",
-  get: async ({ get }) => {
-    const documentId = get(selectedDocumentAtom);
-
-    if (!documentId) return undefined;
-
-    try {
-      const { data } = await client.query({
-        query: GET_DOCUMENT,
-        variables: {
-          shortId: documentId,
-        },
-      });
-
-      return data.share;
-    } catch (e) {
-      throw e;
+    if (value) {
+      set(selectedArtBoardAtom, value.id);
     }
   },
 });
