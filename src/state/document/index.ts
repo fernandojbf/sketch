@@ -78,6 +78,15 @@ export const documentDataSelector = selector({
   },
 });
 
+export const selectArtBoardLength = selector({
+  key: 'selector-artboard-length',
+  get: ({ get }) => {
+    const entries = getEntriesFromDocument(get(documentDataSelector));
+
+    return entries.length;
+  },
+});
+
 export const selectedArtBoard = selector({
   key: 'selector-artboard-item',
   get: ({ get }) => {
@@ -85,6 +94,26 @@ export const selectedArtBoard = selector({
     const selectedArtBoardId = get(selectedArtBoardAtom);
 
     return entries.find((entry) => entry.id === selectedArtBoardId);
+  },
+});
+
+export const unselectArtBoard = selector({
+  key: 'selector-unselect-artboard',
+  get: () => {},
+  set: ({ reset }) => {
+    reset(selectedArtBoardAtom);
+  },
+});
+
+export const selectedArtBoardIndex = selector({
+  key: 'selector-artboard-index',
+  get: ({ get }) => {
+    const entries = getEntriesFromDocument(get(documentDataSelector));
+    const selectedArtBoardId = get(selectedArtBoardAtom);
+
+    const index = entries.findIndex((entry) => entry.id === selectedArtBoardId);
+
+    return index;
   },
 });
 
