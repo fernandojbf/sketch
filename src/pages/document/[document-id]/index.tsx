@@ -1,5 +1,5 @@
-import { useRouter } from "next/router";
-import SketchDocument from "../../../components/SketchDocument";
+import { useRouter } from 'next/router';
+import SketchDocument from '../../../components/SketchDocument';
 
 export default function DocumentIndex() {
   return <SketchDocument />;

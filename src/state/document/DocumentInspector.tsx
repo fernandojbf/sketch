@@ -1,10 +1,13 @@
-import { useRecoilState, useRecoilTransactionObserver_UNSTABLE } from "recoil";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-import { selectionsSelector } from ".";
+import {
+  useRecoilTransactionObserver_UNSTABLE,
+  useSetRecoilState,
+} from 'recoil';
+import { useEffect, memo } from 'react';
+import { useRouter } from 'next/router';
+import { selectionsSelector } from '.';
 
-const QUERY_DOCUMENT = "document-id";
-const QUERY_ARTBOARD = "artboard-id";
+const QUERY_DOCUMENT = 'document-id';
+const QUERY_ARTBOARD = 'artboard-id';
 
 const getRoute = (documentId, artBoxId) => {
   let as = `/document/${documentId}`;
@@ -18,14 +21,16 @@ const getRoute = (documentId, artBoxId) => {
 };
 
 // TODO: MISSING BACK ROUTING STATE
-export const DocumentInspector = () => {
+export const DocumentInspector = memo(() => {
   const { query, push } = useRouter();
-  const [_, setSelection] = useRecoilState(selectionsSelector);
+  const setSelection = useSetRecoilState(selectionsSelector);
 
   useRecoilTransactionObserver_UNSTABLE(({ snapshot, previousSnapshot }) => {
+    // @ts-ignore
     const newSelection = snapshot.getLoadable(selectionsSelector).getValue();
     const previewsSelection = previousSnapshot
       .getLoadable(selectionsSelector)
+      // @ts-ignore
       .getValue();
 
     // this should be moved to a function
@@ -52,6 +57,6 @@ export const DocumentInspector = () => {
   }, []);
 
   return null;
-};
+});
 
 export default DocumentInspector;

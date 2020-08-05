@@ -1,15 +1,15 @@
-import { ThemeProvider } from "styled-components";
-import { ApolloClient, InMemoryCache } from "@apollo/client";
-import { RecoilRoot } from "recoil";
-import { ApolloProvider } from "@apollo/client";
+import { ThemeProvider } from 'styled-components';
+import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { RecoilRoot } from 'recoil';
+import { ApolloProvider } from '@apollo/client';
 
-import DocumentInspector from "../state/document/DocumentInspector";
+import DocumentInspector from '../state/document/DocumentInspector';
 
-import theme from "../styles/theme";
-import GlobalStyle from "../styles/global";
+import theme from '../styles/theme';
+import GlobalStyle from '../styles/global';
 
 export const client = new ApolloClient({
-  uri: "https://graphql.sketch.cloud/api",
+  uri: 'https://graphql.sketch.cloud/api',
   cache: new InMemoryCache(),
 });
 

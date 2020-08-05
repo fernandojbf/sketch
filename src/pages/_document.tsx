@@ -1,6 +1,6 @@
-import { ReactNode, ComponentType } from "react";
-import Document, { Head, Main, NextScript } from "next/document";
-import { ServerStyleSheet } from "styled-components";
+import { ReactNode, ComponentType } from 'react';
+import Document, { Head, Main, NextScript } from 'next/document';
+import { ServerStyleSheet } from 'styled-components';
 
 interface Props {
   styleTags: ReactNode;

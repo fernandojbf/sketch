@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 import {
   color,
@@ -17,7 +17,7 @@ import {
   FlexboxProps,
   position,
   PositionProps,
-} from "styled-system";
+} from 'styled-system';
 
 type BoxProps = ColorProps &
   SpaceProps &

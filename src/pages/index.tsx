@@ -1,6 +1,6 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import Text from "../components/Text";
+import Text from '../components/Text';
 
 export default function Home() {
   return (

@@ -1,12 +1,11 @@
-import { atom, selector } from "recoil";
-import { gql } from "@apollo/client";
+import { atom, selector } from 'recoil';
+import { gql } from '@apollo/client';
 
-import { client } from "../../pages/_app";
+import { client } from '../../pages/_app';
 
 const GET_DOCUMENT = gql`
   query GetDocument($shortId: String!) {
     share(shortId: $shortId) {
-      shortId
       version {
         document {
           name
@@ -48,17 +47,17 @@ const getEntriesFromDocument = (documentData) => {
 };
 
 export const selectedDocumentAtom = atom({
-  key: "atom-document-id",
+  key: 'atom-document-id',
   default: undefined,
 });
 
 const selectedArtBoardAtom = atom({
-  key: "atom-artboard-id",
+  key: 'atom-artboard-id',
   default: undefined,
 });
 
 export const documentDataSelector = selector({
-  key: "selector-document-data",
+  key: 'selector-document-data',
   get: async ({ get }) => {
     const documentId = get(selectedDocumentAtom);
 
@@ -80,7 +79,7 @@ export const documentDataSelector = selector({
 });
 
 export const selectedArtBoard = selector({
-  key: "selector-artboard-item",
+  key: 'selector-artboard-item',
   get: ({ get }) => {
     const entries = getEntriesFromDocument(get(documentDataSelector));
     const selectedArtBoardId = get(selectedArtBoardAtom);
@@ -90,7 +89,7 @@ export const selectedArtBoard = selector({
 });
 
 export const selectedPrevArtBoard = selector({
-  key: "selector-prev-artboard",
+  key: 'selector-prev-artboard',
   get: ({ get }) => {
     const documentData = get(documentDataSelector);
     const entries = getEntriesFromDocument(documentData);
@@ -113,7 +112,7 @@ export const selectedPrevArtBoard = selector({
 });
 
 export const selectedNextArtBoard = selector({
-  key: "selector-next-artboard",
+  key: 'selector-next-artboard',
   get: ({ get }) => {
     const documentData = get(documentDataSelector);
     const entries = getEntriesFromDocument(documentData);
@@ -139,7 +138,7 @@ export const selectionsSelector = selector<{
   documentId?: string;
   artBoxId?: string;
 }>({
-  key: "selector-selected-ids",
+  key: 'selector-selected-ids',
   get: ({ get }) => ({
     documentId: get(selectedDocumentAtom),
     artBoxId: get(selectedArtBoardAtom),

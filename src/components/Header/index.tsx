@@ -1,9 +1,9 @@
-import { ReactNode, FunctionComponent } from "react";
-import styled from "styled-components";
+import { ReactNode, FunctionComponent } from 'react';
+import styled from 'styled-components';
 
-import Box from "../Box";
+import Box from '../Box';
 
-import { ThemeProps } from "../../styles/theme";
+import { ThemeProps } from '../../styles/theme';
 
 interface HeaderProps {
   content?: ReactNode;
@@ -13,7 +13,7 @@ interface HeaderProps {
 const PreContentWrapper = styled(Box)`
   position: relative;
   ::after {
-    content: "";
+    content: '';
     position: absolute;
     top: 50%;
     right: 0;
