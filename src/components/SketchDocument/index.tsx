@@ -78,7 +78,11 @@ const SketchDocument = () => {
       />
 
       {shouldShowBlank ? (
-        <div>Loading</div>
+        <Text as="p">
+          {hasError || data.errorMaybe()
+            ? data.errorMaybe().message
+            : 'Loading'}
+        </Text>
       ) : (
         <ContentList
           items={entries.map((entry) => ({

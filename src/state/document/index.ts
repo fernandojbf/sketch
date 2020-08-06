@@ -1,4 +1,4 @@
-import { atom, selector } from 'recoil';
+import { atom, selector, errorSelector } from 'recoil';
 import { gql } from '@apollo/client';
 
 import { client } from '../../pages/_app';
@@ -64,7 +64,7 @@ export const documentDataSelector = selector({
     if (!documentId) return undefined;
 
     try {
-      const { data } = await client.query({
+      const { data, error, errors } = await client.query({
         query: GET_DOCUMENT,
         variables: {
           shortId: documentId,
@@ -112,6 +112,11 @@ export const selectedArtBoardIndex = selector({
     const selectedArtBoardId = get(selectedArtBoardAtom);
 
     const index = entries.findIndex((entry) => entry.id === selectedArtBoardId);
+    if (selectedArtBoardId && index === -1) {
+      throw new Error(
+        `ArtBoard ${selectedArtBoardId} is not present in document`
+      );
+    }
 
     return index;
   },

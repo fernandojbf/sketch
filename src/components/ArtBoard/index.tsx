@@ -81,7 +81,11 @@ const ArtBoard = memo(() => {
         }
       />
       {shouldShowBlank ? (
-        <div>loading</div>
+        <Text as="p">
+          {hasError || data.errorMaybe()
+            ? data.errorMaybe().message
+            : 'Loading'}
+        </Text>
       ) : (
         <ArtBoardFileViewer {...artBoard.files[0]} />
       )}
