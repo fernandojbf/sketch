@@ -1,7 +1,4 @@
-import {
-  useRecoilTransactionObserver_UNSTABLE,
-  useSetRecoilState,
-} from 'recoil';
+import { useRecoilTransactionObserver_UNSTABLE, useRecoilState } from 'recoil';
 import { useEffect, memo } from 'react';
 import { useRouter } from 'next/router';
 import { selectionsSelector } from '.';
@@ -20,10 +17,9 @@ const getRoute = (documentId, artBoxId) => {
   return { as, url };
 };
 
-// TODO: MISSING BACK ROUTING STATE
 export const DocumentInspector = memo(() => {
   const { query, push } = useRouter();
-  const setSelection = useSetRecoilState(selectionsSelector);
+  const [selections, setSelection] = useRecoilState(selectionsSelector);
 
   useRecoilTransactionObserver_UNSTABLE(({ snapshot, previousSnapshot }) => {
     // @ts-ignore
@@ -33,7 +29,7 @@ export const DocumentInspector = memo(() => {
       // @ts-ignore
       .getValue();
 
-    // this should be moved to a function
+    // this can be moved to a function for better reading
     if (
       (query[QUERY_DOCUMENT] !== newSelection.documentId ||
         query[QUERY_ARTBOARD] !== newSelection.artBoxId) &&
@@ -45,16 +41,24 @@ export const DocumentInspector = memo(() => {
         newSelection.artBoxId
       );
 
+      // always push is really restrictive. for sure in a real application we will want to replace some routes.
+      // to simplify, i've used always plush only for the purpose of this challenge.
       push(url, as);
     }
   });
 
   useEffect(() => {
-    setSelection({
-      documentId: query[QUERY_DOCUMENT] as string,
-      artBoxId: query[QUERY_ARTBOARD] as string,
-    });
-  }, []);
+    // routing state sync
+    if (
+      selections.documentId !== query[QUERY_DOCUMENT] ||
+      selections.artBoxId !== query[QUERY_ARTBOARD]
+    ) {
+      setSelection({
+        documentId: query[QUERY_DOCUMENT] as string,
+        artBoxId: query[QUERY_ARTBOARD] as string,
+      });
+    }
+  }, [query[QUERY_DOCUMENT], query[QUERY_ARTBOARD]]);
 
   return null;
 });
