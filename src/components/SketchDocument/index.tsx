@@ -21,6 +21,10 @@ import { ThemeProps } from '../../styles/theme';
 import PageGrid from '../PageGrid';
 
 const getDocumentInfo = (documentData) => {
+  if (!documentData) {
+    return [];
+  }
+
   const {
     version: {
       document: {
@@ -58,27 +62,24 @@ const SketchDocument = () => {
   const isLoading = data.state === 'loading';
   const hasError = data.state === 'hasError';
 
-  if (isLoading) {
-    return <div>loading</div>;
-  }
-
-  if (hasError) {
-    return <div>error</div>;
-  }
   const [documentId, documentData] =
     // @ts-ignore
     isLoading || hasError ? [] : data.getValue();
 
   const [name, entries] = getDocumentInfo(documentData);
 
+  const shouldShowBlank = isLoading || hasError || !entries;
+
   return (
     <PageGrid>
       <Header
         preContent={<img alt="Sketch Logo" src="/sketch-logo.svg" />}
-        content={<Text as="h1">{name}</Text>}
+        content={!shouldShowBlank && <Text as="h1">{name}</Text>}
       />
 
-      {isLoading ? null : (
+      {shouldShowBlank ? (
+        <div>Loading</div>
+      ) : (
         <ContentList
           items={entries.map((entry) => ({
             id: entry.name,
