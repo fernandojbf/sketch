@@ -1,3 +1,4 @@
+import { ReactElement, FunctionComponent } from 'react';
 import styled from 'styled-components';
 
 import { ThemeProps } from '../../../styles/theme';
@@ -20,7 +21,12 @@ const Item = styled.li`
   display: flex;
 `;
 
-const ContentList = ({ items }) => {
+const ContentList: FunctionComponent<{
+  items: Array<{
+    element: ReactElement;
+    id: string;
+  }>;
+}> = ({ items }) => {
   return (
     <List>
       {items.map((item) => (
