@@ -14,8 +14,12 @@ const Header: FunctionComponent<HeaderProps> = ({ content, preContent }) => (
     boxShadow="hard"
     py="0"
     position="relative"
+    minHeight={5}
+    as="header"
   >
-    {preContent && <Box padding="3">{preContent}</Box>}
+    <Box px="3" py="2">
+      {preContent || <img alt="Sketch Logo" src="/sketch-logo.svg" />}
+    </Box>
     <Box as="img" height="40px" src={'/separator.svg'} />
     <Box px="4">{content}</Box>
   </Box>

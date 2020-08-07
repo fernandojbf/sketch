@@ -2,12 +2,15 @@ import styled from 'styled-components';
 
 import Text from '../../components/Text';
 
+import { ThemeProps } from '../../styles/theme';
+
+
 const Wrapper = styled.div`
   display: grid;
   grid-auto-columns: 100%;
   grid-template-rows: minmax(0, 1fr) max-content;
   align-items: center;
-  row-gap: 8px;
+  row-gap: ${({ theme }: ThemeProps) => theme.sizes[1]};
   flex: 1;
 `;
 
@@ -25,6 +28,7 @@ const ArtBoardPreview = ({ artboard }) => {
       <Image
         alt={`entry.name thumbnail`}
         src={artboard.files[0].thumbnails[0].url}
+        loading="lazy"
       />
 
       <Text textAlign="center">{artboard.name}</Text>

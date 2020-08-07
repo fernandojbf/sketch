@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { ThemeProps } from '../../styles/theme';
+
 // responsive work could be done here
 const List = styled.ul`
   padding: 0;
@@ -8,10 +10,10 @@ const List = styled.ul`
   display: grid;
   grid-template-columns: repeat(5, calc(20% - 25.6px));
   grid-auto-rows: 350px;
-  grid-gap: 32px;
+  grid-gap: ${({ theme }: ThemeProps) => theme.sizes[4]};
   justify-items: stretch;
   align-items: stretch;
-  padding: 16px;
+  padding: ${({ theme }: ThemeProps) => theme.sizes[3]};
 `;
 
 const Item = styled.li`

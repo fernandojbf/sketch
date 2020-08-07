@@ -71,10 +71,7 @@ const SketchDocument = () => {
 
   return (
     <PageGrid>
-      <Header
-        preContent={<img alt="Sketch Logo" src="/sketch-logo.svg" />}
-        content={!shouldShowBlank && <Text as="h1">{name}</Text>}
-      />
+      <Header content={!shouldShowBlank && <Text as="h1">{name}</Text>} />
 
       {shouldShowBlank ? (
         <Text as="p" textAlign="center">

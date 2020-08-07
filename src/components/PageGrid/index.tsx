@@ -1,13 +1,14 @@
 import styled from 'styled-components';
+import { ThemeProps } from '../../styles/theme';
 
 const PageGrid = styled.div<{ fixedHeight?: boolean }>`
   display: grid;
-  height: ${({ fixedHeight = false }) => (fixedHeight ? '100vh' : 'auto')};
+  height: ${({ fixedHeight = false }) => (fixedHeight ? '100vh' : 'inherit')};
   grid-auto-columns: 100%;
   grid-template-rows: max-content minmax(0, 1fr);
-  align-items: center;
-  row-gap: 16px;
-  padding-bottom: 16px;
+  row-gap: ${({ theme }: ThemeProps) => theme.sizes[3]};
+  padding-bottom: ${({ theme }: ThemeProps) => theme.sizes[3]};
+  flex: 1;
 `;
 
 export default PageGrid;
