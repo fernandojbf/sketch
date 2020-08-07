@@ -93,7 +93,7 @@ const SketchDocument = () => {
                   e.preventDefault();
                   setSelection({
                     documentId: documentId,
-                    artBoxId: entry.id,
+                    artBoardId: entry.id,
                     // @ts-ignore
                     routerAction: push,
                   });

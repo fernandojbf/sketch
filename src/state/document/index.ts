@@ -38,12 +38,15 @@ const GET_DOCUMENT = gql`
   }
 `;
 
-const getRoute = (documentId?: string, artBoxId?: string): [string, string] => {
+const getRoute = (
+  documentId?: string,
+  artBoardId?: string
+): [string, string] => {
   let as = `/document/${documentId}`;
   let url = `/document/[${QUERY_DOCUMENT}]`;
 
-  if (!!artBoxId) {
-    as += `/${artBoxId}`;
+  if (!!artBoardId) {
+    as += `/${artBoardId}`;
     url += `/[${QUERY_ARTBOARD}]`;
   }
   return [url, as];
@@ -186,29 +189,29 @@ export const unselectArtBoard = selector({
 
 export const selectionsSelector = selector<{
   documentId?: string;
-  artBoxId?: string;
+  artBoardId?: string;
 }>({
   key: 'selector-selected-ids',
   get: ({ get }) => ({
     documentId: get(selectedDocumentAtom),
-    artBoxId: get(selectedArtBoardAtom),
+    artBoardId: get(selectedArtBoardAtom),
   }),
   set: (
     { set },
     {
       documentId,
-      artBoxId,
+      artBoardId,
       routerAction,
     }: {
       documentId?: string;
-      artBoxId?: string;
+      artBoardId?: string;
       routerAction: RouterActionType;
     }
   ) => {
     if (routerAction) {
-      routerAction(...getRoute(documentId, artBoxId));
+      routerAction(...getRoute(documentId, artBoardId));
     }
     set(selectedDocumentAtom, documentId);
-    set(selectedArtBoardAtom, artBoxId);
+    set(selectedArtBoardAtom, artBoardId);
   },
 });

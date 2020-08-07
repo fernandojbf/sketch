@@ -14,11 +14,11 @@ export const DocumentInspector = memo(() => {
     // routing state sync
     if (
       selections.documentId !== query[QUERY_DOCUMENT] ||
-      selections.artBoxId !== query[QUERY_ARTBOARD]
+      selections.artBoardId !== query[QUERY_ARTBOARD]
     ) {
       setSelection({
         documentId: query[QUERY_DOCUMENT] as string,
-        artBoxId: query[QUERY_ARTBOARD] as string,
+        artBoardId: query[QUERY_ARTBOARD] as string,
       });
     }
   }, [query[QUERY_DOCUMENT], query[QUERY_ARTBOARD]]);
