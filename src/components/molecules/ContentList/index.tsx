@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { ThemeProps } from '../../styles/theme';
+import { ThemeProps } from '../../../styles/theme';
 
 // responsive work could be done here
 const List = styled.ul`

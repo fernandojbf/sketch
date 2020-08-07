@@ -1,6 +1,6 @@
 import { ReactNode, FunctionComponent } from 'react';
 
-import Box from '../Box';
+import Box from '../../atoms/Box';
 
 interface HeaderProps {
   content?: ReactNode;

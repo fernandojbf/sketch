@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { ThemeProps } from '../../styles/theme';
+import { ThemeProps } from '../../../styles/theme';
 
 // simple button
 const Button = styled.button`

@@ -2,19 +2,19 @@ import { useRecoilValueLoadable, waitForAll, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 
-import Header from '../Header';
-import ArtBoardPreview from '../ArtBoardPreview';
-import Text from '../Text';
-import ContentList from '../ContentList';
+import Header from '../../molecules/Header';
+import ArtBoardPreview from '../../molecules/ArtBoardPreview';
+import ContentList from '../../molecules/ContentList';
+import PageGrid from '../../atoms/PageGrid';
+import Text from '../../atoms/Text';
 
 import {
   documentDataSelector,
   selectionsSelector,
   selectedDocumentAtom,
-} from '../../state/document';
+} from '../../../state/document';
 
-import { ThemeProps } from '../../styles/theme';
-import PageGrid from '../PageGrid';
+import { ThemeProps } from '../../../styles/theme';
 
 const getDocumentInfo = (documentData) => {
   if (!documentData) {

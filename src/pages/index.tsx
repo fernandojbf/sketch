@@ -1,9 +1,9 @@
 import Link from 'next/link';
 
-import PageGrid from '../components/PageGrid';
-import Header from '../components/Header';
-import Box from '../components/Box';
-import Text from '../components/Text';
+import Header from '../components/molecules/Header';
+import PageGrid from '../components/atoms/PageGrid';
+import Box from '../components/atoms/Box';
+import Text from '../components/atoms/Text';
 
 export default function Home() {
   return (

@@ -1,3 +1,3 @@
-import ArtBoard from '../../../components/ArtBoard';
+import ArtBoard from '../../../components/pages/ArtBoard';
 
 export default ArtBoard;

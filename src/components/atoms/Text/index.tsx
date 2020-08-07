@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { typography, TypographyProps, space, SpaceProps } from 'styled-system';
 
-import { ThemeProps } from '../../styles/theme';
+import { ThemeProps } from '../../../styles/theme';
 
 type TextProps = SpaceProps &
   TypographyProps & {

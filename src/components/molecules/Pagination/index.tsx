@@ -1,10 +1,8 @@
-import styled from 'styled-components';
-
 import { FunctionComponent } from 'react';
 
-import Box from '../Box';
-import Button from '../Button';
-import Text from '../Text';
+import Box from '../../atoms/Box';
+import Button from '../../atoms/Button';
+import Text from '../../atoms/Text';
 
 interface PaginationProps {
   currentPage: number;

@@ -6,13 +6,13 @@ import {
   selectedArtBoard,
   unselectArtBoard,
   selectArtBoardPagination,
-} from '../../state/document';
+} from '../../../state/document';
 
-import PageGrid from '../PageGrid';
-import Header from '../Header';
-import Pagination from '../Pagination';
-import Button from '../Button';
-import Text from '../Text';
+import Header from '../../molecules/Header';
+import Pagination from '../../molecules/Pagination';
+import PageGrid from '../../atoms/PageGrid';
+import Button from '../../atoms/Button';
+import Text from '../../atoms/Text';
 
 import ArtBoardFileViewer from './ArtBoardFileViewer';
 import { useRouter } from 'next/router';

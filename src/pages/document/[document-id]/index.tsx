@@ -1,3 +1,3 @@
-import SketchDocument from '../../../components/SketchDocument';
+import SketchDocument from '../../../components/pages/SketchDocument';
 
 export default SketchDocument;

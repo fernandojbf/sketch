@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ThemeProps } from '../../styles/theme';
+import { ThemeProps } from '../../../styles/theme';
 
 const PageGrid = styled.div<{ fixedHeight?: boolean }>`
   display: grid;

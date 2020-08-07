@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import styled from 'styled-components';
 
-import DeviceEmulation from '../DeviceEmulation';
+import DeviceEmulation from '../../molecules/DeviceEmulation';
 
 const Image = styled.img`
   object-fit: scale-down;
