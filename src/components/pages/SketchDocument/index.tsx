@@ -70,7 +70,7 @@ const SketchDocument = () => {
   const shouldShowBlank = isLoading || hasError || !entries;
 
   return (
-    <PageGrid>
+    <PageGrid as="main">
       <Header content={!shouldShowBlank && <Text as="h1">{name}</Text>} />
 
       {shouldShowBlank ? (

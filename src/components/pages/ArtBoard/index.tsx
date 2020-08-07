@@ -62,7 +62,7 @@ const ArtBoard = memo(() => {
   const shouldShowBlank = isLoading || hasError || !artBoard;
 
   return (
-    <PageGrid fixedHeight>
+    <PageGrid fixedHeight as="main">
       <Header
         preContent={
           <Button

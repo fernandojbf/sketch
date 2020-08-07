@@ -5,7 +5,7 @@ import Text from '../../atoms/Text';
 
 import { ThemeProps } from '../../../styles/theme';
 
-const Wrapper = styled.div`
+const Wrapper = styled.figure`
   display: grid;
   grid-auto-columns: 100%;
   grid-template-rows: minmax(0, 1fr) max-content;
@@ -30,7 +30,9 @@ const ArtBoardPreview: FunctionComponent<{ url: string; name: string }> = ({
     <Wrapper>
       <Image alt={`${name} thumbnail`} src={url} loading="lazy" />
 
-      <Text textAlign="center">{name}</Text>
+      <Text as="figcaption" textAlign="center">
+        {name}
+      </Text>
     </Wrapper>
   );
 };

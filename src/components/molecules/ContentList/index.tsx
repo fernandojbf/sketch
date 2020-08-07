@@ -1,6 +1,8 @@
 import { ReactElement, FunctionComponent } from 'react';
 import styled from 'styled-components';
 
+import Box from '../../atoms/Box';
+
 import { ThemeProps } from '../../../styles/theme';
 
 // responsive work could be done here
@@ -17,10 +19,6 @@ const List = styled.ul`
   padding: ${({ theme }: ThemeProps) => theme.sizes[3]};
 `;
 
-const Item = styled.li`
-  display: flex;
-`;
-
 const ContentList: FunctionComponent<{
   items: Array<{
     element: ReactElement;
@@ -30,7 +28,9 @@ const ContentList: FunctionComponent<{
   return (
     <List>
       {items.map((item) => (
-        <Item key={item.id}>{item.element}</Item>
+        <Box as="li" display="flex" key={item.id}>
+          {item.element}
+        </Box>
       ))}
     </List>
   );

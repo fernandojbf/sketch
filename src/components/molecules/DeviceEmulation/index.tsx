@@ -1,17 +1,13 @@
 import { ReactNode, FunctionComponent, memo } from 'react';
 import styled from 'styled-components';
 
+import Box from '../../atoms/Box';
+
 type DeviceEmulationDeviceProps = {
   width: number;
   height: number;
   children: ReactNode;
 };
-
-const DeviceEmulationWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-`;
 
 const DeviceEmulationDevice = styled.div<DeviceEmulationDeviceProps>`
   width: ${({ width }) => `${width}px`};
@@ -23,11 +19,11 @@ const DeviceEmulationDevice = styled.div<DeviceEmulationDeviceProps>`
 
 const DeviceEmulation: FunctionComponent<DeviceEmulationDeviceProps> = memo(
   ({ children, width, height }) => (
-    <DeviceEmulationWrapper>
+    <Box width="100%" height="100%" display="flex">
       <DeviceEmulationDevice width={width} height={height}>
         {children}
       </DeviceEmulationDevice>
-    </DeviceEmulationWrapper>
+    </Box>
   )
 );
 
