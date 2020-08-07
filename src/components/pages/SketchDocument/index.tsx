@@ -99,7 +99,10 @@ const SketchDocument = () => {
                   });
                 }}
               >
-                <ArtBoardPreview artboard={entry} />
+                <ArtBoardPreview
+                  url={entry.files[0].thumbnails[0].url}
+                  name={entry.name}
+                />
               </Link>
             ),
           }))}

@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import styled from 'styled-components';
 
 import Text from '../../atoms/Text';
@@ -21,16 +22,15 @@ const Image = styled.img`
   width: 100%;
 `;
 
-const ArtBoardPreview = ({ artboard }) => {
+const ArtBoardPreview: FunctionComponent<{ url: string; name: string }> = ({
+  url,
+  name,
+}) => {
   return (
     <Wrapper>
-      <Image
-        alt={`entry.name thumbnail`}
-        src={artboard.files[0].thumbnails[0].url}
-        loading="lazy"
-      />
+      <Image alt={`${name} thumbnail`} src={url} loading="lazy" />
 
-      <Text textAlign="center">{artboard.name}</Text>
+      <Text textAlign="center">{name}</Text>
     </Wrapper>
   );
 };
