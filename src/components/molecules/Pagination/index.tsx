@@ -20,7 +20,7 @@ const textProps = {
 const Pagination: FunctionComponent<PaginationProps> = ({
   currentPage,
   paginationLength,
-  role = ' navigation',
+  role = 'navigation',
   onNext,
   onPrevious,
 }) => (
@@ -33,9 +33,21 @@ const Pagination: FunctionComponent<PaginationProps> = ({
     >
       <img src="/arrow-left.svg" alt="left icon" />
     </Button>
-    <Text {...textProps}>{currentPage}</Text>
+    <Text
+      {...textProps}
+      data-testid="pagination-current-page"
+      aria-label="current page number"
+    >
+      {currentPage}
+    </Text>
     <Text {...textProps}>/</Text>
-    <Text {...textProps}>{paginationLength}</Text>
+    <Text
+      {...textProps}
+      data-testid="pagination-length"
+      aria-label="number of total pages"
+    >
+      {paginationLength}
+    </Text>
     <Button role={role} onClick={onNext} disabled={!onNext} aria-label="next">
       <img src="/arrow-right.svg" alt="left icon" />
     </Button>
