@@ -9,7 +9,7 @@ const List = styled.ul`
   margin: 0;
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(5, calc(20% - 25.6px));
+  grid-template-columns: repeat(5, 1fr);
   grid-auto-rows: 350px;
   grid-gap: ${({ theme }: ThemeProps) => theme.sizes[4]};
   justify-items: stretch;
