@@ -4,6 +4,7 @@ import { RecoilRoot } from 'recoil';
 import { ApolloProvider } from '@apollo/client';
 
 import DocumentInspector from '../state/document/DocumentInspector';
+import useIsFirstRender from '../hooks/useIsFirstRender';
 
 import theme from '../styles/theme';
 import GlobalStyle from '../styles/global';
@@ -13,18 +14,20 @@ export const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-function MyApp({ Component, pageProps }) {
+const MyApp = ({ Component, pageProps }) => {
+  const isFirstRender = useIsFirstRender();
+
   return (
     <RecoilRoot>
-      <DocumentInspector />
       <ApolloProvider client={client}>
         <ThemeProvider theme={theme}>
           <GlobalStyle />
-          <Component {...pageProps} />
+          <DocumentInspector />
+          <Component {...pageProps} isFirstRender={isFirstRender} />
         </ThemeProvider>
       </ApolloProvider>
     </RecoilRoot>
   );
-}
+};
 
 export default MyApp;
