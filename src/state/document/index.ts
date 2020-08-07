@@ -1,4 +1,4 @@
-import { atom, selector, errorSelector } from 'recoil';
+import { atom, selector } from 'recoil';
 import { gql } from '@apollo/client';
 import { NextRouter } from 'next/router';
 import { client } from '../../pages/_app';

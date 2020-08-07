@@ -51,7 +51,7 @@ const SketchDocument = () => {
   const { push } = useRouter();
   const setSelection = useSetRecoilState(selectionsSelector);
 
-  // since next use ssr and suspense does not work with ssr, i will use useRecoilValueLoadable in this project
+  // since next uses ssr and suspense does not work with ssr, i will use useRecoilValueLoadable in this project
   const data = useRecoilValueLoadable(
     waitForAll([selectedDocumentAtom, documentDataSelector])
   );

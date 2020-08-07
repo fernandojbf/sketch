@@ -1,4 +1,4 @@
-import { useRecoilTransactionObserver_UNSTABLE, useRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { useEffect, memo } from 'react';
 import { useRouter } from 'next/router';
 import { selectionsSelector } from '.';
