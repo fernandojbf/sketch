@@ -1,14 +1,11 @@
-import { memo } from 'react';
+import { memo, useCallback, Suspense } from 'react';
 import { useRecoilValueLoadable, waitForAll, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 import {
   selectedArtBoard,
-  selectedPrevArtBoard,
-  selectedNextArtBoard,
-  selectArtBoardLength,
-  selectedArtBoardIndex,
   unselectArtBoard,
+  selectArtBoardPagination,
 } from '../../state/document';
 
 import PageGrid from '../PageGrid';
@@ -18,6 +15,7 @@ import Button from '../Button';
 import Text from '../Text';
 
 import ArtBoardFileViewer from './ArtBoardFileViewer';
+import { useRouter } from 'next/router';
 
 const Label = styled(Text)`
   position: absolute;
@@ -27,32 +25,42 @@ const Label = styled(Text)`
 `;
 
 const ArtBoard = memo(() => {
-  const selectPrevValue = useSetRecoilState(selectedPrevArtBoard);
-  const selectNextValue = useSetRecoilState(selectedNextArtBoard);
-  const onClose = useSetRecoilState(unselectArtBoard);
+  const { replace, push } = useRouter();
+  const setPagination = useSetRecoilState(selectArtBoardPagination);
+  const unselectArtBoardFunction = useSetRecoilState(unselectArtBoard);
 
   const data = useRecoilValueLoadable(
-    waitForAll([
-      selectedArtBoard,
-      selectedPrevArtBoard,
-      selectedNextArtBoard,
-      selectedArtBoardIndex,
-      selectArtBoardLength,
-    ])
+    waitForAll([selectedArtBoard, selectArtBoardPagination])
   );
+
+  const onPrev = useCallback(() => {
+    setPagination({ type: 'prev', routerAction: replace });
+  }, []);
+
+  const onNext = useCallback(() => {
+    setPagination({ type: 'next', routerAction: replace });
+  }, []);
+
+  const onClose = useCallback(() => {
+    // @ts-ignore
+    unselectArtBoardFunction({ routerAction: push });
+  }, []);
 
   const isLoading = data.state === 'loading';
   const hasError = data.state === 'hasError';
 
-  const [artBoard, prev, next, currentPage, maxLength] =
+  const [artBoard, pagination] =
     isLoading || hasError
-      ? []
+      ? [undefined, {}]
       : // @ts-ignore
         data.getValue();
 
+  const { prev, next, currentPage, paginationLength } = pagination;
+
+  // this will prevent the error with the race condition between router and recoil
+  // history using recoil would be good solution for this.
   const shouldShowBlank = isLoading || hasError || !artBoard;
 
-  // pagination need to me changed
   return (
     <PageGrid fixedHeight>
       <Header
@@ -69,10 +77,10 @@ const ArtBoard = memo(() => {
           !shouldShowBlank && (
             <>
               <Pagination
-                onPrevious={prev && (selectPrevValue as () => void)}
-                onNext={next && (selectNextValue as () => void)}
-                currentNumber={currentPage}
-                maxLength={maxLength}
+                onPrevious={prev && onPrev}
+                onNext={next && onNext}
+                currentPage={currentPage}
+                paginationLength={paginationLength}
               />
 
               <Label as="h1">{artBoard.name}</Label>
@@ -80,10 +88,14 @@ const ArtBoard = memo(() => {
           )
         }
       />
+
       {shouldShowBlank ? (
-        <Text as="p">
-          {hasError || data.errorMaybe()
-            ? data.errorMaybe().message
+        <Text as="p" textAlign="center">
+          {hasError ||
+          // @ts-ignore
+          data.errorMaybe()
+            ? // @ts-ignore
+              data.errorMaybe().message
             : 'Loading'}
         </Text>
       ) : (

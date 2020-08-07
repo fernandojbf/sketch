@@ -1,4 +1,4 @@
-import { ReactNode, FunctionComponent } from 'react';
+import { ReactNode, FunctionComponent, memo } from 'react';
 import styled from 'styled-components';
 
 type DeviceEmulationDeviceProps = {
@@ -21,16 +21,14 @@ const DeviceEmulationDevice = styled.div<DeviceEmulationDeviceProps>`
   margin: auto;
 `;
 
-const DeviceEmulation: FunctionComponent<DeviceEmulationDeviceProps> = ({
-  children,
-  width,
-  height,
-}) => (
-  <DeviceEmulationWrapper>
-    <DeviceEmulationDevice width={width} height={height}>
-      {children}
-    </DeviceEmulationDevice>
-  </DeviceEmulationWrapper>
+const DeviceEmulation: FunctionComponent<DeviceEmulationDeviceProps> = memo(
+  ({ children, width, height }) => (
+    <DeviceEmulationWrapper>
+      <DeviceEmulationDevice width={width} height={height}>
+        {children}
+      </DeviceEmulationDevice>
+    </DeviceEmulationWrapper>
+  )
 );
 
 export default DeviceEmulation;

@@ -1,10 +1,6 @@
-import {
-  useRecoilValueLoadable,
-  useRecoilState,
-  waitForAll,
-  useSetRecoilState,
-} from 'recoil';
+import { useRecoilValueLoadable, waitForAll, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
 
 import Header from '../Header';
 import ArtBoardPreview from '../ArtBoardPreview';
@@ -52,6 +48,7 @@ const Link = styled.a`
 `;
 
 const SketchDocument = () => {
+  const { push } = useRouter();
   const setSelection = useSetRecoilState(selectionsSelector);
 
   // since next use ssr and suspense does not work with ssr, i will use useRecoilValueLoadable in this project
@@ -68,6 +65,8 @@ const SketchDocument = () => {
 
   const [name, entries] = getDocumentInfo(documentData);
 
+  // this will prevent the error with the race condition between router and recoil
+  // history using recoil would be good solution for this.
   const shouldShowBlank = isLoading || hasError || !entries;
 
   return (
@@ -78,9 +77,12 @@ const SketchDocument = () => {
       />
 
       {shouldShowBlank ? (
-        <Text as="p">
-          {hasError || data.errorMaybe()
-            ? data.errorMaybe().message
+        <Text as="p" textAlign="center">
+          {hasError ||
+          // @ts-ignore
+          data.errorMaybe()
+            ? // @ts-ignore
+              data.errorMaybe().message
             : 'Loading'}
         </Text>
       ) : (
@@ -92,7 +94,12 @@ const SketchDocument = () => {
                 href={`/document/${documentId}/${entry.id}`}
                 onClick={(e) => {
                   e.preventDefault();
-                  setSelection({ documentId: documentId, artBoxId: entry.id });
+                  setSelection({
+                    documentId: documentId,
+                    artBoxId: entry.id,
+                    // @ts-ignore
+                    routerAction: push,
+                  });
                 }}
               >
                 <ArtBoardPreview artboard={entry} />

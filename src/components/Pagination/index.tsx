@@ -7,8 +7,8 @@ import Button from '../Button';
 import Text from '../Text';
 
 interface PaginationProps {
-  currentNumber: number;
-  maxLength: number;
+  currentPage: number;
+  paginationLength: number;
   role?: 'navigation';
   onNext?(): void;
   onPrevious?(): void;
@@ -20,8 +20,8 @@ const textProps = {
 };
 
 const Pagination: FunctionComponent<PaginationProps> = ({
-  currentNumber,
-  maxLength,
+  currentPage,
+  paginationLength,
   role = ' navigation',
   onNext,
   onPrevious,
@@ -35,9 +35,9 @@ const Pagination: FunctionComponent<PaginationProps> = ({
     >
       <img src="/arrow-left.svg" alt="left icon" />
     </Button>
-    <Text {...textProps}>{currentNumber}</Text>
+    <Text {...textProps}>{currentPage}</Text>
     <Text {...textProps}>/</Text>
-    <Text {...textProps}>{maxLength}</Text>
+    <Text {...textProps}>{paginationLength}</Text>
     <Button role={role} onClick={onNext} disabled={!onNext} aria-label="next">
       <img src="/arrow-right.svg" alt="left icon" />
     </Button>
